@@ -1,0 +1,113 @@
+@media (max-width: 1200px) {
+
+    .container {
+        width: 900px;
+    }
+    
+    .user-box a {
+        font-size: 0; 
+    }
+
+    .user-box {
+        gap: 0;
+    }
+
+    .modal-content {
+        padding: 30px 300px; 
+    }
+
+    .user-box {
+        display: none;
+    }
+
+}
+
+@media (max-width: 992px) {
+    .container {
+        width: 700px;
+    }
+
+    header img {
+        display: none;
+    }
+
+    .input-item input {
+        width: 700px;
+    }
+
+    .input-item input, .input-item button {
+        height: 30px;
+    }
+
+    .catalog-btn {
+        display: none;
+    }
+
+    .scroll-btn {
+        display: none !important;
+    }
+
+    .swiper-slide img {
+        margin-top: 5px;
+    }
+
+    .category-container {
+        margin-top: 10px;
+    }
+
+    .mobile_header {
+        display: flex;
+    }
+
+    .img-container {
+        display: none;
+    }
+
+    .modal-content {
+        padding: 30px 150px; 
+        top: -60px;
+    }
+
+    .card-detail {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 500px;
+    }
+
+    .input-item input {
+        width: 450px;
+    }
+
+    .modal-content {
+        padding: 30px 20px;
+        top: -50px; 
+    }
+
+    .basket-content-container {
+        flex-direction: column;
+    }
+
+    .basket-list-container, .total-and-checkout-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        width: 100%;
+        padding: 0 5px;
+    }
+
+    .input-item input {
+        width: 400px;
+    }
+
+    .modal-content {
+        padding: 15px; 
+        top: -30px; 
+    }
+}

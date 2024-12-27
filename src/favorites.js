@@ -1,82 +1,46 @@
-import './style.css'
+import './style.css';
 import './media.css';
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
 import { productCard } from './product.js';
 
-const swiper = new Swiper('.swiper', {
-  loop: true,
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true, 
-  },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  scrollbar: {
-    el: '.swiper-scrollbar',
-    draggable: true, 
-  },
-  autoplay: {
-    delay: 5000, 
-    disableOnInteraction: false, 
-  },
-  slidesPerView: 1,
-  spaceBetween: 10,
-}); 
+const container = document.querySelector(".favorites-container")
+const favorites = JSON.parse(localStorage.getItem("favorites")) || []
 
-fetch("/db.json")
-  .then(response => response.json())
-  .then(data => {
-    const products = data.products || []
-    const categories = {}
+if (favorites.length === 0) {
+  const noItems = document.createElement("div")
+  noItems.classList.add("no-items")
 
-    products.forEach(product => {
-      if (!categories[product.category]) {
-        categories[product.category] = []
-      }
-      categories[product.category].push(product)
-    })
+  const noItemsImage = document.createElement("img")
+  noItemsImage.src = "./public/logos/hearts.png"
+  noItemsImage.classList.add("no-items-image")
 
-    const productContainer = document.querySelector(".product_container")
-    productContainer.innerHTML = ""
+  const message = document.createElement("p")
+  message.classList.add("no-items-message")
+  message.textContent = "Добавьте то, что понравилось"
 
-    for (const category in categories) {
-      const categoryContainer = document.createElement("div")
-      categoryContainer.classList.add("category-container")
+  const subtext = document.createElement("p")
+  subtext.classList.add("no-items-subtext")
+  subtext.textContent = "Перейдите на главную страницу и нажмите на ♡ в товаре"
 
-      const categoryHeader = document.createElement("h2")
-      categoryHeader.classList.add("category-header")
-      categoryHeader.textContent = category.charAt(0).toUpperCase() + category.slice(1)
-      categoryContainer.append(categoryHeader)
+  const actionLink = document.createElement("a")
+  actionLink.href = "index.html"
+  actionLink.classList.add("no-items-subtext")
+  actionLink.textContent = "На главную"
 
-      const productsListContainer = document.createElement("div")
-      productsListContainer.classList.add("products-list-container")
+  noItems.append(noItemsImage, message, subtext, actionLink)
+  container.append(noItems)
+} 
+else {
+  const favoritesTitle = document.createElement("h2")
+  favoritesTitle.classList.add("favorites-title")
+  favoritesTitle.textContent = "Избранное"
 
-      categories[category].forEach(product => {
-        productCard(product, productsListContainer)
-      })
+  const favoritesListContainer = document.createElement("div")
+  favoritesListContainer.classList.add("favorites-list-container")
 
-      categoryContainer.append(productsListContainer)
-      productContainer.append(categoryContainer)
-    }
-  })
+  container.append(favoritesTitle, favoritesListContainer)
 
-const scrollBtn= document.querySelector(".scroll-btn")
-
-window.onscroll = () => {
-  if (window.scrollY > 700) { 
-    scrollBtn.style.display = "flex"
-  } else {
-    scrollBtn.style.display = "none"
-  }
-}
-
-scrollBtn.onclick = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+  favorites.forEach(product => {
+    productCard(product, favoritesListContainer)
   })
 }
 
@@ -170,10 +134,27 @@ window.onclick = (event) => {
   }
 }
 
-const loginLink = document.querySelector('.login-link')
-const loginModal = document.getElementById('login-modal')
-const closeBtn = document.querySelector('.custom-close-btn')
-const phoneInput = document.getElementById('phone')
+const uzumBtn = document.querySelector(".uzum-btn")
+
+uzumBtn.onclick = () => {
+  window.location.href = "index.html"
+}
+
+const favoriteLink = document.querySelector(".favorites-link")
+const basketLink = document.querySelector(".basket-link")
+
+favoriteLink.onclick = () => {
+  window.location.href = "favorites.html"
+}
+
+basketLink.onclick = () => {
+  window.location.href = "basket.html"
+}
+
+const loginLink = document.querySelector('.login-link');
+const loginModal = document.getElementById('login-modal');
+const closeBtn = document.querySelector('.custom-close-btn');
+const phoneInput = document.getElementById('phone');
 
 loginLink.onclick = () => {
   loginModal.style.display = 'block'
